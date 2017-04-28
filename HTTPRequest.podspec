@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "HTTPRequest"
-  s.version      = "1.0.1"
+  s.version      = "1.0.8"
   s.summary      = "Handles Service request"
   s.description  = "Handles Server request response"
   s.homepage     = "https://github.com/"
@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.author             = "Kahuna"
   s.platform     = :ios, "8.0"
   s.preserve_path = 'HTTPRequest/LogCamp.modulemap'
-  s.source       = { :git => "https://github.com/vishakhajadhav/HTTPRequest.git", :tag => "1.0.1" }
+  s.source       = { :git => "https://github.com/vishakhajadhav/HTTPRequest.git", :tag => "1.0.8" }
   s.source_files  = "HTTPRequest", "HTTPRequest/**/*.{h,m,swift}"
   s.dependency 'Alamofire' 
   s.public_header_files = "LogCamp/KALogger/*.h"
