@@ -11,7 +11,7 @@ HTTPRequest handles GET, POST and Multipart webservice call using alamofire fram
 1] Add GitHub repository link in your pod file
 ```ruby
 pod 'LogCamp', :git => 'https://github.com/PrasadPotale/KahunaLogCamp.git', :tag => '3.2.5' 
-pod 'HTTPRequest', :git => 'https://github.com/vishakhajadhav/HTTPRequest.git', :tag => '1.0.5'
+pod 'HTTPRequest', :git => 'https://github.com/vishakhajadhav/HTTPRequest.git', :tag => '1.0.6'
 ```
 2] Execute 
 ```swift
@@ -30,19 +30,18 @@ on terminal with your project path
 ```
 
 ### Implementation
-####For GET Service
+##For GET Service
 ```swift
 E.g: let httpRequestObj = HTTPRequest.sharedInstance
 httpRequestObj.sendGetRequestAtPath("server url path", withParameters: requestParameters as?[String : AnyObject], timeoutInterval: 60, userName: "username", endpointName: "url endpoint")
 ```
-####For POST Service
+##For POST Service
 ```swift
 E.g: let httpRequestObj = HTTPRequest.sharedInstance
-httpRequestObj.sendGetRequestAtPath("server url path", withParameters: requestParameters as?[String : AnyObject], timeoutInterval: 60, userName: "username", endpointName: "url endpoint")
 sendRequestAtPath("server url", withParameters: requestParameters as?[String : AnyObject], timeoutInterval: 60, andToken: "tokenString", userName: "name", endpointName: "endpoint")
 ```
 
-####For Multipart Service
+##For Multipart Service
 ```swift
 let httpRequestObj = HTTPRequest.sharedInstance
  httpRequestObj.sendMultipartRequestAtPath("server url path", withImagePaths: [imagePathArray], andParameters: requestParameters as?[String : AnyObject], timeoutInterval: 60, userToken: "tokenString", uploadImageKeyName: "keyname", imageUploadJSONName: "JSON_name", userName: "username", endPointName: "endpoint")

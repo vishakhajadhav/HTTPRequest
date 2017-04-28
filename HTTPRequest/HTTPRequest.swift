@@ -30,7 +30,7 @@ public class HTTPRequest
     var alamofireManager = Alamofire.SessionManager.default*/
     
     public static let sharedInstance = HTTPRequest()
-    weak var delegate: HTTPRequestDelegate?
+    public weak var delegate: HTTPRequestDelegate?
     var alamofireManager = Alamofire.SessionManager.default
     public struct APIManager {
         public static let sharedManager = { () -> SessionManager in
