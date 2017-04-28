@@ -26,8 +26,18 @@ public class HTTPRequest
         case emptyHTTPResponse
     }
     //static let sharedInstance = HTTPRequest()
-    public weak var delegate : HTTPRequestDelegate?
+    /*public weak var delegate : HTTPRequestDelegate?
+    var alamofireManager = Alamofire.SessionManager.default*/
+    
+    public static let sharedInstance = HTTPRequest()
+    weak var delegate: HTTPRequestDelegate?
     var alamofireManager = Alamofire.SessionManager.default
+    public struct APIManager {
+        public static let sharedManager = { () -> SessionManager in
+            let configuration = URLSessionConfiguration.default
+            return SessionManager(configuration: configuration)
+        }()
+    }
     public init(){
     }
     
@@ -59,8 +69,12 @@ public class HTTPRequest
             tokenToSet = String(format: "token%@", token)
             print(tokenToSet)
         }
-        let authheader = [ "Authorization": tokenToSet]
-        Alamofire.request(path, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: authheader) .downloadProgress { progress in
+        var authheader:[String:String]? = nil
+        if tokenToSet.characters.count > 0 {
+            authheader = [ "Authorization": tokenToSet]
+        }
+        
+       APIManager.sharedManager.request(path, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: authheader) .downloadProgress { progress in
             let percent = progress.completedUnitCount / progress.totalUnitCount
             print("percent DataReceived=============> \(percent)")
             
@@ -110,7 +124,7 @@ public class HTTPRequest
                             if let otime = jsonObjectDict?["requestOutTime"] {
                                 requestOutTime = String(format: "%@", (otime as? String)!)
                             }
-                            self.sendTimeStampLogsToServer(serviceType: path, responseStatus: responseStatus, mobileReqStart: requestStartTime, mobileResponseReceive: responseReceiveTime, mobileServiceParse: responseParseTime, serverRequestReceive: requestInTime, serverResponseStart: requestOutTime)
+                            self.sendTimeStampLogsToServer(path, responseStatus: responseStatus, mobileReqStart: requestStartTime, mobileResponseReceive: responseReceiveTime, mobileServiceParse: responseParseTime, serverRequestReceive: requestInTime, serverResponseStart: requestOutTime)
                         }
                         self.handleResponse(jsonResponse: jsonObject as AnyObject, forPath: path)
                     }
@@ -130,7 +144,7 @@ public class HTTPRequest
      */
     public func sendGetRequestAtPath(_ path: String, withParameters parameters: [String: AnyObject]?, timeoutInterval interval: Int, userName: String, endpointName: String) {
         print("\n\nURL: \(path)")
-        Alamofire.request(path, method: .get, parameters: parameters, encoding: JSONEncoding.default, headers: nil).responseJSON { response in
+        APIManager.sharedManager.request(path, method: .get, parameters: parameters, encoding: JSONEncoding.default, headers: nil).responseJSON { response in
             let responseData = response.data as Data?
             let resultText = NSString(data: responseData!, encoding: String.Encoding.utf8.rawValue)
             print("GET Result :\(resultText)")
@@ -254,7 +268,7 @@ public class HTTPRequest
                                 if let otime = jsonObjectDict?["requestOutTime"] {
                                     requestOutTime = String(format: "%@", (otime as? String)!)
                                 }
-                                self.sendTimeStampLogsToServer(serviceType: path, responseStatus: responseStatus, mobileReqStart: requestStartTime, mobileResponseReceive: responseReceiveTime, mobileServiceParse: responseParseTime, serverRequestReceive: requestInTime, serverResponseStart: requestOutTime)
+                                self.sendTimeStampLogsToServer(path, responseStatus: responseStatus, mobileReqStart: requestStartTime, mobileResponseReceive: responseReceiveTime, mobileServiceParse: responseParseTime, serverRequestReceive: requestInTime, serverResponseStart: requestOutTime)
                             }
                             self.handleResponse(jsonResponse: jsonObject as AnyObject, forPath: path)
                         }
