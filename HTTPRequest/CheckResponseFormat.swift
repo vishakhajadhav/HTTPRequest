@@ -9,7 +9,7 @@
 import Foundation
 
 
-class CheckResponseFormat : NSObject{
+class CheckResponseFormat : NSObject, NSCoding{
 
 	var result : ResultFormat!
 
@@ -43,7 +43,7 @@ class CheckResponseFormat : NSObject{
     */
     @objc required init(coder aDecoder: NSCoder)
 	{
-         result = aDecoder.decodeObject(forKey: "status") as? ResultFormat
+         result = aDecoder.decodeObjectForKey("status") as? ResultFormat
 
 	}
 
@@ -54,7 +54,7 @@ class CheckResponseFormat : NSObject{
     @objc func encodeWithCoder(aCoder: NSCoder)
 	{
 		if result != nil{
-			aCoder.encode(result, forKey: "status")
+			aCoder.encodeObject(result, forKey: "status")
 		}
 
 	}

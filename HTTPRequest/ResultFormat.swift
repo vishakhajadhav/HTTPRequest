@@ -8,7 +8,7 @@
 import Foundation
 
 
-class ResultFormat : NSObject{
+class ResultFormat : NSObject, NSCoding{
 
 	var cause : String!
 	var code : Int!
@@ -47,9 +47,9 @@ class ResultFormat : NSObject{
     */
     @objc required init(coder aDecoder: NSCoder)
 	{
-         cause = aDecoder.decodeObject(forKey: "cause") as? String
-         code = aDecoder.decodeObject(forKey: "code") as? Int
-         message = aDecoder.decodeObject(forKey: "message") as? String
+        cause = aDecoder.decodeObjectForKey("cause") as? String
+        code = aDecoder.decodeObjectForKey("code") as? Int
+        message = aDecoder.decodeObjectForKey("message") as? String
 
 	}
 
@@ -59,16 +59,15 @@ class ResultFormat : NSObject{
     */
     @objc func encodeWithCoder(aCoder: NSCoder)
 	{
-		if cause != nil{
-			aCoder.encode(cause, forKey: "cause")
-		}
-		if code != nil{
-			aCoder.encode(code, forKey: "code")
-		}
-		if message != nil{
-			aCoder.encode(message, forKey: "message")
-		}
-
+        if cause != nil{
+            aCoder.encodeObject(cause, forKey: "cause")
+        }
+        if code != nil{
+            aCoder.encodeObject(code, forKey: "code")
+        }
+        if message != nil{
+            aCoder.encodeObject(message, forKey: "message")
+        }
 	}
 
 }
