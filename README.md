@@ -11,7 +11,7 @@ HTTPRequest handles GET, POST and Multipart webservice call using alamofire fram
 1] Add GitHub repository link in your pod file
 ```ruby
 pod 'LogCamp', :git => 'https://github.com/PrasadPotale/KahunaLogCamp.git', :tag => '3.2.5' 
-pod 'HTTPRequest', :git => 'https://github.com/vishakhajadhav/HTTPRequest.git', :tag => '1.0.13'
+pod 'HTTPRequest', :git => 'https://github.com/vishakhajadhav/HTTPRequest.git', :tag => '1.0.14'
 ```
 2] Execute 
 ```swift
